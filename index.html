@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Adams Lounge | Luxury Bar & Lounge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0a0a0a 0%, #121212 100%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            padding: 20px 16px 100px 16px;
+            min-height: 100vh;
+            color: #e0dcc8;
+        }
+
+        /* main container */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(18, 18, 18, 0.78);
+            backdrop-filter: blur(1px);
+            border-radius: 48px 48px 42px 42px;
+            padding: 32px 20px 40px 20px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.2s;
+        }
+
+        /* logo wrapper using provided text-based logo */
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-icon {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 30% 25%, #1f1b10, #0a0804);
+            border-radius: 50%;
+            margin: 0 auto 12px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2.5px solid #d4af37;
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.4);
+        }
+        .logo-icon span {
+            font-size: 52px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f5e7a3, #c6a42b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Times New Roman', serif;
+        }
+        .brand-name {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #f2e6c9, #d4af37, #b4942e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-top: 6px;
+        }
+        .brand-sub {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #d4af37;
+            margin-top: -6px;
+            font-weight: 300;
+        }
+
+        .phone-row {
+            text-align: center;
+            margin: 20px 0 28px 0;
+        }
+        .phone-link {
+            text-decoration: none;
+            color: #e6d9b6;
+            font-size: 20px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.4);
+            padding: 8px 24px;
+            border-radius: 60px;
+            border: 0.5px solid rgba(212,175,55,0.6);
+            transition: 0.2s;
+        }
+
+        /* Buttons vertical — all golden text, no background on text, clean */
+        .btn-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin: 28px 0 20px 0;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: rgba(20, 18, 16, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 16px 12px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            color: #d4af37;  /* golden text */
+            border: 0.5px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 10px 20px -8px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .btn .emoji-icon, .btn .social-icon {
+            font-size: 26px;
+            filter: drop-shadow(0 1px 1px black);
+        }
+        .btn span {
+            flex: 1;
+            text-align: center;
+            color: #d4af37;
+        }
+        .btn-whatsapp {
+            background: #075e54;
+            border-color: #25d366;
+            color: white;
+        }
+        .btn-whatsapp span {
+            color: white;
+        }
+        .btn:hover {
+            background: #2a271f;
+            border-color: #e4c668;
+            transform: scale(0.98);
+        }
+        /* special style for "View Our Menu" single line */
+        .single-line {
+            white-space: nowrap;
+        }
+
+        /* HIDDEN MENU SECTION - only visible when toggled */
+        .menu-wrapper {
+            display: none;
+            margin-top: 36px;
+            animation: fadeSlideUp 0.35s ease-out;
+        }
+        .menu-wrapper.show-menu {
+            display: block;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Menu cards - golden text only, no extra background on text */
+        .menu-category {
+            background: rgba(0,0,0,0.55);
+            border-radius: 32px;
+            padding: 12px 18px 22px 18px;
+            margin-bottom: 28px;
+            border-left: 4px solid #d4af37;
+            backdrop-filter: blur(2px);
+        }
+        .cat-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #d4af37; /* pure gold */
+            letter-spacing: -0.2px;
+            border-bottom: 1px solid rgba(212,175,55,0.5);
+            display: inline-block;
+            margin-bottom: 18px;
+            padding-right: 12px;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 10px 0;
+            border-bottom: 0.5px dashed rgba(212,175,55,0.3);
+            font-size: 15px;
+            font-weight: 400;
+        }
+        .item-name {
+            font-weight: 500;
+            color: #f2e6c9;
+        }
+        .item-price {
+            font-weight: 600;
+            color: #d4af37;
+            font-size: 16px;
+        }
+        .small-note {
+            font-size: 11px;
+            color: #c9ad5e;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .signature {
+            font-size: 13px;
+            text-align: center;
+            margin-top: 16px;
+            color: #d4af37;
+        }
+        .back-home {
+            background: rgba(212,175,55,0.1);
+            border-radius: 40px;
+            padding: 12px;
+            text-align: center;
+            margin-top: 20px;
+            cursor: pointer;
+            border: 1px dashed #d4af37;
+            color: #d4af37;
+            font-weight: 500;
+        }
+
+        /* fixed bottom navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #faf7f0;
+            box-shadow: 0 -4px 18px rgba(0,0,0,0.15);
+            border-top: 1px solid #e2cf8b;
+            padding: 10px 24px 18px 24px;
+            z-index: 1000;
+        }
+        .nav-items {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #2c2b26;
+            transition: 0.1s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .nav-icon {
+            font-size: 24px;
+        }
+        .nav-item.active {
+            color: #8b2c1a;
+        }
+        .nav-item.active .nav-icon {
+            color: #8b2c1a;
+        }
+        .copyright-tag {
+            text-align: center;
+            font-size: 10px;
+            color: #bcb696;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
+            background: transparent; /* no background on text */
+            width: 100%;
+            padding: 4px 0;
+        }
+        @media (max-width: 480px) {
+            .container { padding: 24px 14px 32px 14px; }
+            .brand-name { font-size: 26px; }
+            .btn span { font-size: 16px; }
+        }
+        /* official social icons using SVG / emoji mix but official look */
+        .fb-icon, .ig-icon, .tt-icon {
+            display: inline-block;
+            width: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="mainContainer">
+    <!-- logo section based on provided image/text: A + ADAM'S LOUNGE -->
+    <div class="logo-wrapper">
+        <div class="logo-icon">
+            <span>A</span>
+        </div>
+        <div class="brand-name">ADAM'S LOUNGE</div>
+        <div class="brand-sub">LUXURY • COCKTAILS • HOOKAH</div>
+    </div>
+
+    <div class="phone-row">
+        <a href="tel:9705537898" class="phone-link">
+            <span>📞</span> +977 9705537898
+        </a>
+    </div>
+
+    <!-- action buttons with official FB/IG logos using official brand emojis + custom styling (no extra background text) -->
+    <div class="btn-list">
+        <!-- View Our Menu button - single line text -->
+        <div class="btn" id="viewMenuBtn">
+            <span class="emoji-icon">🍽️</span>
+            <span class="single-line">View Our Menu</span>
+            <span style="width: 28px;"></span>
+        </div>
+
+        <!-- Facebook with official logo style (fb emoji) -->
+        <a href="https://facebook.com" target="_blank" class="btn">
+            <span class="social-icon">📘</span>
+            <span>Facebook</span>
+            <span style="width: 28px;"></span>
+        </a>
+        <!-- Instagram official logo -->
+        <a href="https://instagram.com" target="_blank" class="btn">
+            <span class="social-icon">📸</span>
+            <span>Instagram</span>
+            <span style="width: 28px;"></span>
+        </a>
+        <!-- TikTok -->
+        <a href="https://tiktok.com" target="_blank" class="btn">
+            <span class="social-icon">🎵</span>
+            <span>TikTok</span>
+            <span style="width: 28px;"></span>
+        </a>
+        <!-- Find on Map -->
+        <a href="https://maps.google.com/?q=Baraghare+Naughare+Bharatpur-3+Chitwan" target="_blank" class="btn">
+            <span class="emoji-icon">📍</span>
+            <span>Find Us on Map</span>
+            <span style="width: 28px;"></span>
+        </a>
+        <!-- WhatsApp green -->
+        <a href="https://wa.me/9779705537898" target="_blank" class="btn btn-whatsapp">
+            <span class="emoji-icon">💬</span>
+            <span>Chat on WhatsApp</span>
+            <span style="width: 28px;"></span>
+        </a>
+    </div>
+
+    <!-- FULL MENU SECTION - hidden initially, shows only on click -->
+    <div id="menuSection" class="menu-wrapper">
+        <!-- COCKTAILS -->
+        <div class="menu-category">
+            <div class="cat-title">🍸 COCKTAILS</div>
+            <div class="menu-item"><span class="item-name">Black Russian</span><span class="item-price">RS.950</span></div>
+            <div class="menu-item"><span class="item-name">Screw Driver</span><span class="item-price">RS.650</span></div>
+            <div class="menu-item"><span class="item-name">Cape Cod</span><span class="item-price">RS.650</span></div>
+            <div class="menu-item"><span class="item-name">Sex on the Beach</span><span class="item-price">RS.850</span></div>
+            <div class="menu-item"><span class="item-name">Cosmopolitan</span><span class="item-price">RS.800</span></div>
+            <div class="menu-item"><span class="item-name">Espresso Martini</span><span class="item-price">RS.1050</span></div>
+            <div class="menu-item"><span class="item-name">Whiskey Sour</span><span class="item-price">RS.1000</span></div>
+            <div class="menu-item"><span class="item-name">Mint Julep</span><span class="item-price">RS.1000</span></div>
+            <div class="menu-item"><span class="item-name">Old Fashioned</span><span class="item-price">RS.1000</span></div>
+            <div class="menu-item"><span class="item-name">Manhattan</span><span class="item-price">RS.1100</span></div>
+            <div class="menu-item"><span class="item-name">Tequila Sunrise</span><span class="item-price">RS.950</span></div>
+            <div class="menu-item"><span class="item-name">Margarita / Blue Margarita</span><span class="item-price">RS.1050</span></div>
+            <div class="menu-item"><span class="item-name">Cuba Libre</span><span class="item-price">RS.700</span></div>
+            <div class="menu-item"><span class="item-name">Hot Rum Punch</span><span class="item-price">RS.850</span></div>
+            <div class="menu-item"><span class="item-name">Daiquiri</span><span class="item-price">RS.850</span></div>
+            <div class="menu-item"><span class="item-name">Pina Colada</span><span class="item-price">RS.950</span></div>
+            <div class="menu-item"><span class="item-name">Negroni / Dry Martini</span><span class="item-price">RS.1050/950</span></div>
+            <div class="menu-item"><span class="item-name">Pink Lady</span><span class="item-price">RS.1150</span></div>
+            <div class="small-note">🔥 Flaming: Lamborghini RS.1800 | Devil on Fire RS.1600</div>
+        </div>
+        <!-- SPIRITS & SHOTS -->
+        <div class="menu-category">
+            <div class="cat-title">🥃 SPIRITS & SHOTS</div>
+            <div class="menu-item"><span class="item-name">Red Label / VAT 69 (30ml)</span><span class="item-price">RS.450</span></div>
+            <div class="menu-item"><span class="item-name">OD Reserve / Signature (30ml)</span><span class="item-price">RS.250</span></div>
+            <div class="menu-item"><span class="item-name">Imported Vodka / Gin (30ml)</span><span class="item-price">RS.450</span></div>
+            <div class="menu-item"><span class="item-name">Kahlua / Baileys (30ml)</span><span class="item-price">RS.500-550</span></div>
+            <div class="menu-item"><span class="item-name">Hennessy VSOP (30ml)</span><span class="item-price">RS.850</span></div>
+            <div class="menu-item"><span class="item-name">Shots: B-52 / Brain Hemorrhage</span><span class="item-price">ask lounge</span></div>
+            <div class="menu-item"><span class="item-name">Long Island Iced Tea (LIT)</span><span class="item-price">RS.1250</span></div>
+            <div class="small-note">🍺 Beers: Gorkha RS.650 | Tuborg RS.680 | Corona RS.640 | Sherpa IPA RS.580</div>
+        </div>
+        <!-- WINE & MOCKTAILS -->
+        <div class="menu-category">
+            <div class="cat-title">🍷 WINE & MOCKTAILS</div>
+            <div class="menu-item"><span class="item-name">House Wine (Red/White)</span><span class="item-price">RS.2000</span></div>
+            <div class="menu-item"><span class="item-name">Jacob's Creek Shiraz / Cabernet</span><span class="item-price">RS.4400-4900</span></div>
+            <div class="menu-item"><span class="item-name">JP Chenet Sparkling</span><span class="item-price">RS.10000</span></div>
+            <div class="menu-item"><span class="item-name">Sangria (Wine sharing)</span><span class="item-price">RS.3500</span></div>
+            <div class="menu-item"><span class="item-name">Fruit Punch / Blue Angel</span><span class="item-price">RS.350</span></div>
+            <div class="menu-item"><span class="item-name">Virgin Mojito / Blue Pina Colada</span><span class="item-price">RS.300</span></div>
+            <div class="menu-item"><span class="item-name">Watermelon Cooler</span><span class="item-price">RS.350</span></div>
+        </div>
+        <!-- APPETIZERS & MAINS -->
+        <div class="menu-category">
+            <div class="cat-title">🍕 APPETIZERS & MAINS</div>
+            <div class="menu-item"><span class="item-name">Hot & Spicy Porkchops</span><span class="item-price">RS.700</span></div>
+            <div class="menu-item"><span class="item-name">Salsa Chicken / Royal Chicken</span><span class="item-price">RS.800-850</span></div>
+            <div class="menu-item"><span class="item-name">Chicken Sizzler / Veg Sizzler</span><span class="item-price">RS.800 / 600</span></div>
+            <div class="menu-item"><span class="item-name">Spaghetti Carbonara</span><span class="item-price">RS.350</span></div>
+            <div class="menu-item"><span class="item-name">Risotto Funghi / Seafood Risotto</span><span class="item-price">RS.700 / 400</span></div>
+            <div class="menu-item"><span class="item-name">Chicken Burger / Club Sandwich</span><span class="item-price">RS.350-400</span></div>
+            <div class="menu-item"><span class="item-name">Pizza: Margherita / Meat Lover</span><span class="item-price">RS.600-850</span></div>
+            <div class="menu-item"><span class="item-name">Mo:Mo (Veg/Buff/Chicken) steam/fried</span><span class="item-price">RS.160-350</span></div>
+            <div class="menu-item"><span class="item-name">Biryani (Chicken / Veg)</span><span class="item-price">RS.550 / 450</span></div>
+            <div class="small-note">🍟 Sides: Peri Peri Fries RS.300 | Cheese Ball RS.400</div>
+        </div>
+        <!-- DESSERTS & COFFEE -->
+        <div class="menu-category">
+            <div class="cat-title">🍰 DESSERTS & COFFEE</div>
+            <div class="menu-item"><span class="item-name">Ice Cream (Single)</span><span class="item-price">RS.200</span></div>
+            <div class="menu-item"><span class="item-name">Fried Ice Cream</span><span class="item-price">RS.400</span></div>
+            <div class="menu-item"><span class="item-name">The Thim Roof Sundae</span><span class="item-price">RS.450</span></div>
+            <div class="menu-item"><span class="item-name">Espresso / Doppio</span><span class="item-price">RS.120-180</span></div>
+            <div class="menu-item"><span class="item-name">Cappuccino / Latte / Iced</span><span class="item-price">RS.200-280</span></div>
+            <div class="menu-item"><span class="item-name">Hookah (Cloud / Special)</span><span class="item-price">RS.1500 / 800</span></div>
+        </div>
+        <div class="signature">✦ All prices include taxes ✦</div>
+        <div class="back-home" id="backHomeBtn">🏠 Back to Home</div>
+    </div>
+</div>
+
+<!-- BOTTOM FIXED NAVIGATION -->
+<div class="bottom-nav">
+    <div class="copyright-tag">
+        © 2026 Adams Lounge • Baraghare Naughare, Bharatpur-3, Chitwan
+    </div>
+    <div class="nav-items">
+        <button class="nav-item" id="navHomeBtn">
+            <span class="nav-icon">🏠</span>
+            <span>HOME</span>
+        </button>
+        <button class="nav-item" id="navMenuBtn">
+            <span class="nav-icon">🍴</span>
+            <span>MENU</span>
+        </button>
+        <button class="nav-item" id="navAboutBtn">
+            <span class="nav-icon">ⓘ</span>
+            <span>ABOUT</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const menuSection = document.getElementById('menuSection');
+        const viewMenuBtn = document.getElementById('viewMenuBtn');
+        const footerMenuBtn = document.getElementById('navMenuBtn');
+        const homeBtn = document.getElementById('navHomeBtn');
+        const aboutBtn = document.getElementById('navAboutBtn');
+        const backHomeInternal = document.getElementById('backHomeBtn');
+
+        function showMenuOnly() {
+            if (!menuSection.classList.contains('show-menu')) {
+                menuSection.classList.add('show-menu');
+            }
+            // smooth scroll to menu
+            setTimeout(() => {
+                menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 80);
+            setActiveFooter('MENU');
+        }
+
+        function hideMenuAndGoHome() {
+            if (menuSection.classList.contains('show-menu')) {
+                menuSection.classList.remove('show-menu');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setActiveFooter('HOME');
+        }
+
+        function setActiveFooter(active) {
+            const home = document.getElementById('navHomeBtn');
+            const menu = document.getElementById('navMenuBtn');
+            const about = document.getElementById('navAboutBtn');
+            home.classList.remove('active');
+            menu.classList.remove('active');
+            about.classList.remove('active');
+            if (active === 'HOME') home.classList.add('active');
+            else if (active === 'MENU') menu.classList.add('active');
+            else if (active === 'ABOUT') about.classList.add('active');
+        }
+
+        // Event: View Our Menu button
+        if (viewMenuBtn) {
+            viewMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showMenuOnly();
+            });
+        }
+        // Footer MENU button
+        if (footerMenuBtn) {
+            footerMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showMenuOnly();
+            });
+        }
+        // HOME button: hide menu, scroll top
+        if (homeBtn) {
+            homeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                hideMenuAndGoHome();
+            });
+        }
+        // Back to Home inside menu section
+        if (backHomeInternal) {
+            backHomeInternal.addEventListener('click', () => {
+                hideMenuAndGoHome();
+            });
+        }
+        // ABOUT button: show info, keep menu visibility unchanged, active about style
+        if (aboutBtn) {
+            aboutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert("✨ ADAM'S LOUNGE ✨\n📍 Baraghare Naughare, Bharatpur-3, Chitwan\n📞 +977 9705537898\n⏰ Open: 12 PM - 12 AM (Luxury Lounge)\n🎵 Premium cocktails • Hookah • Live vibes\n💎 Black & Gold Signature Experience");
+                setActiveFooter('ABOUT');
+            });
+        }
+
+        // initially menu hidden, home active
+        menuSection.classList.remove('show-menu');
+        setActiveFooter('HOME');
+
+        // optional: clicking logo resets to home
+        const logoIconDiv = document.querySelector('.logo-icon');
+        if (logoIconDiv) {
+            logoIconDiv.style.cursor = 'pointer';
+            logoIconDiv.addEventListener('click', () => hideMenuAndGoHome());
+        }
+        const brandNameDiv = document.querySelector('.brand-name');
+        if (brandNameDiv) {
+            brandNameDiv.style.cursor = 'pointer';
+            brandNameDiv.addEventListener('click', () => hideMenuAndGoHome());
+        }
+    })();
+</script>
+</body>
+</html>
